@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="Tracker">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>angularjsintensive</title>
 
-    <script src="libs/angular/angular.min.js"></script>
-    <script src="Tracker.js"></script>
-</head>
-<body>
-    <h1>Hi there</h1>
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css"/>
 
-{{1+1}}
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <!-- modules-->
+    <script src="Tracker.js"></script>
+    <script src="auth/LoginCtrl.js"></script>
+
+</head>
+<body ui-view>
 </body>
 </html>
