@@ -8,7 +8,8 @@ angular
       .state('app', {
         url: "/app",
         abstract: true,
-        templateUrl: "./Tracker.html"
+        templateUrl: "./Tracker.html",
+        controller: 'TrackerCtrl'
       })
       .state('app.login', {
         url: "/login",
@@ -25,5 +26,5 @@ angular
         controller: 'LogoutCtrl'
       })
     ;
-  });
+  })
 ;

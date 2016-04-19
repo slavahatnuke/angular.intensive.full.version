@@ -14,10 +14,10 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="navbar-text">name</li>
-                    <li><a ui-sref="app.logout">Logout</a></li>
-                    <li><a ui-sref="app.login">Login</a></li>
-                    <li><a ui-sref="app.signup">Registration</a></li>
+                    <li class="navbar-text" ng-if="user">{{user.name}}</li>
+                    <li><a ui-sref="app.logout" ng-if="user">Logout</a></li>
+                    <li><a ui-sref="app.login" ng-if="!user">Login</a></li>
+                    <li><a ui-sref="app.signup" ng-if="!user">Registration</a></li>
                 </ul>
             </div>
         </div>

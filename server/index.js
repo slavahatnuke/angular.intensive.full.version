@@ -20,5 +20,16 @@ module.exports = function (app) {
     }
   });
 
+  var isAuthenticated = function (req, res, next) {
+    if (!req.user) {
+      return res.sendStatus(401);
+    } else {
+      next();
+    }
+  };
+
+  app.use('/api/users', isAuthenticated);
+
   require('./auth')(app);
+  require('./user')(app);
 };
