@@ -34,6 +34,25 @@ angular
         url: "/logout",
         controller: 'LogoutCtrl'
       })
+      .state('app.projects', {
+        url: "/projects",
+        template: "<ui-view></ui-view>"
+      })
+      .state('app.projects.list', {
+        url: "/list",
+        templateUrl: "projects/projects.html",
+        controller: 'ProjectsCtrl'
+      })
+      .state('app.projects.new', {
+        url: "/new",
+        templateUrl: "projects/projectsEdit.html",
+        controller: 'ProjectsEditCtrl'
+      })
+      .state('app.projects.edit', {
+        url: "/:projectId/edit",
+        templateUrl: "projects/projectsEdit.html",
+        controller: 'ProjectsEditCtrl'
+      })
     ;
   })
 ;

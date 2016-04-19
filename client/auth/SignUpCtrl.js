@@ -10,7 +10,7 @@ angular
 
     $scope.signUp = function () {
       UserService.signUp($scope.user).then(function () {
-        $state.go('app.projects')
+        $state.go('app.projects.list')
       }, function (resp) {
         $scope.errors = resp.data;
       })

@@ -12,6 +12,10 @@
                 <a class="navbar-brand" href="#">Tracker</a>
             </div>
 
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="app.projects.list">Projects</a></li>
+            </ul>
+
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-text" ng-if="user">{{user.name}}</li>

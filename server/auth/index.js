@@ -1,6 +1,6 @@
 module.exports = function (app) {
 
-  var form = require('express-form');
+  var form = app.container.get('form');
   var field = form.field;
   var User = app.container.get('User');
 
@@ -39,15 +39,7 @@ module.exports = function (app) {
     })
   );
 
-  var validateForm = function (req, res, next) {
-    if (!req.form.isValid) {
-      return res.status(400).json(req.form.getErrors());
-    }
-
-    next();
-  };
-
-  app.post('/api/auth/login', loginForm, validateForm, function (req, res, next) {
+  app.post('/api/auth/login', loginForm, form.validateForm, function (req, res, next) {
 
     User.findOne({email: req.form.email}, function (err, user) {
       if (err) {
@@ -79,7 +71,7 @@ module.exports = function (app) {
     })
   });
 
-  app.post('/api/auth/signup', signupForm, validateForm, function (req, res, next) {
+  app.post('/api/auth/signup', signupForm, form.validateForm, function (req, res, next) {
     new User(req.form).save(function (err, user) {
       if (err) {
         return next(err);

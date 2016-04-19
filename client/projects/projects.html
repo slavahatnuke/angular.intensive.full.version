@@ -1,0 +1,12 @@
+<h3>projects</h3>
+
+<a ui-sref="app.projects.new">Add</a>
+
+<div ng-repeat="project in projects">
+    {{project.name}}
+    <br/>
+    {{project.description}}
+    <br/>
+    <a ng-click="remove(project)" class="btn btn-sm btn-default">remove</a>
+    <a ui-sref="app.projects.edit({projectId: project._id})" class="btn btn-sm btn-default">edit</a>
+</div>
