@@ -1,4 +1,13 @@
-<form ng-submit="login()" name="loginForm">
+<form ng-submit="signUp()" name="signUpForm">
+    <div class="form-group">
+        <label for="userName">User name</label>
+        <input type="text" class="form-control"
+               id="userName"
+               placeholder="Name"
+               ng-model="user.name"
+               name="name">
+        <span ng-show="!signUpForm.name.$valid || errors.name" class="text-danger">Invalid name</span>
+    </div>
     <div class="form-group">
         <label for="inputEmail">Email address</label>
         <input type="email" class="form-control"
@@ -6,7 +15,7 @@
                placeholder="Email"
                ng-model="user.email"
                name="email">
-        <span ng-show="!loginForm.email.$valid || errors.email" class="text-danger">Invalid email</span>
+        <span ng-show="!signUpForm.email.$valid || errors.email" class="text-danger">Invalid email</span>
     </div>
     <div class="form-group">
         <label for="inputPassword">Password</label>
@@ -15,7 +24,7 @@
                placeholder="Password"
                ng-model="user.password"
                name="password">
-        <span ng-show="!loginForm.password.$valid || errors.password" class="text-danger">Invalid password</span>
+        <span ng-show="!signUpForm.password.$valid || errors.password" class="text-danger">Invalid password</span>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
