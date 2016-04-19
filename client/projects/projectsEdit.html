@@ -1,0 +1,26 @@
+<h3>{{project._id ? 'Edit' : 'Add'}} project</h3>
+
+<form ng-submit="save()" name="projectForm">
+    <div class="form-group">
+        <label for="inputName">Name</label>
+        <input type="text" class="form-control"
+               id="inputName"
+               placeholder="Name"
+               ng-model="project.name"
+               name="name">
+        <span ng-show="!projectForm.name.$valid || errors.name" class="text-danger">Invalid name</span>
+    </div>
+
+    <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <textarea class="form-control"
+                  id="inputDescription"
+                  placeholder="Description"
+                  ng-model="project.description"
+                  name="description"></textarea>
+        <span ng-show="!projectForm.description.$valid || errors.description" class="text-danger">Invalid description</span>
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+    <a ui-sref="app.projects.list" class="btn btn-default">Cancel</a>
+</form>
