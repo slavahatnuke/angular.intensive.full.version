@@ -6,6 +6,15 @@ angular
 
     $stateProvider
       .state('app', {
+        resolve: {
+          user: function (UserService, $q) {
+            return $q(function (resolve) {
+              UserService.load().then(resolve, function () {
+                resolve();
+              });
+            })
+          }
+        },
         url: "/app",
         abstract: true,
         templateUrl: "./Tracker.html",
