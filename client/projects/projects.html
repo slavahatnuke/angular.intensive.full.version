@@ -1,12 +1,22 @@
-<h3>projects</h3>
+<div class="page-header">
+    <h1>Projects
+        <button class="btn btn-sm btn-default" ui-sref="app.projects.new">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add
+        </button>
+    </h1>
+</div>
 
-<a ui-sref="app.projects.new">Add</a>
-
-<div ng-repeat="project in projects">
-    <a ui-sref="app.project({projectId: project._id})">{{project.name}}</a>
-    <br/>
-    {{project.description}}
-    <br/>
-    <a ng-click="remove(project)" class="btn btn-sm btn-default">remove</a>
-    <a ui-sref="app.projects.edit({projectId: project._id})" class="btn btn-sm btn-default">edit</a>
+<div class="panel panel-default" ng-repeat="project in projects">
+    <div class="panel-heading">
+        <a ui-sref="app.project({projectId: project._id})">{{project.name}}</a>
+    </div>
+    <div class="panel-body">
+        <p>{{project.description}}</p>
+        <a ng-click="remove(project)" class="btn btn-sm btn-default">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            remove
+        </a>
+        <a ui-sref="app.projects.edit({projectId: project._id})" class="btn btn-sm btn-default">edit</a>
+    </div>
 </div>

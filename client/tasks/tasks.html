@@ -1,13 +1,15 @@
-<h3>tasks</h3>
+<h3>Tasks <task-editor project-id="projectId" on-complete="init"></task-editor></h3>
 
-<!--<a ui-sref="app.tasks.new">Add</a>-->
-<task-editor project-id="projectId" on-complete="init"></task-editor>
-
-<div ng-repeat="task in tasks">
-    {{task.name}}
-    <br/>
-    {{task.description}}
-    <br/>
-    <a ng-click="remove(task)" class="btn btn-sm btn-default">remove</a>
-    <task-editor on-complete="init" task="task"></task-editor>
+<div class="panel panel-default" ng-repeat="task in tasks">
+    <div class="panel-heading">
+        {{task.name}}
+    </div>
+    <div class="panel-body">
+        <p>{{task.description}}</p>
+        <a ng-click="remove(task)" class="btn btn-sm btn-default">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            remove
+        </a>
+        <task-editor on-complete="init" task="task"></task-editor>
+    </div>
 </div>

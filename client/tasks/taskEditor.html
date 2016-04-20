@@ -1,5 +1,11 @@
-<button class="btn btn-sm btn-default" ng-click="add()" ng-if="!task">Add task</button>
-<button class="btn btn-sm btn-default" ng-click="edit()" ng-if="task">Edit task</button>
+<button class="btn btn-sm btn-default" ng-click="add()" ng-if="!task">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    Add
+</button>
+<button class="btn btn-sm btn-default" ng-click="edit()" ng-if="task">
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+    Edit
+</button>
 
 <form ng-submit="save()" name="taskForm" ng-if="form">
     <div class="form-group">
