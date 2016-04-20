@@ -1,5 +1,10 @@
 angular
   .module('Tracker')
+  .factory('User', function ($resource) {
+    return $resource('/api/users/:userId', {userId: '@_id'}, {
+      update: {method: 'PUT'}
+    });
+  })
   .factory('UserService', function ($resource) {
 
     var Auth = $resource('/api/auth/:action', {}, {

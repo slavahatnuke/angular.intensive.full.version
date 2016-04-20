@@ -29,6 +29,7 @@ module.exports = function (app) {
   };
 
   app.use('/api/users', isAuthenticated);
+  app.use('/api/projects', isAuthenticated);
 
   require('./auth')(app);
   require('./user')(app);

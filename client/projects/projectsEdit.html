@@ -21,6 +21,19 @@
         <span ng-show="!projectForm.description.$valid || errors.description" class="text-danger">Invalid description</span>
     </div>
 
+    <div class="form-group">
+        <label for="inputShare">Share</label>
+        <ui-select id="inputShare" ng-model="project.share" multiple>
+            <ui-select-match>
+                <span ng-bind="$item.name"></span>
+            </ui-select-match>
+            <ui-select-choices repeat="user._id as user in (users | filter: $select.search)">
+                <span>{{user.name}}</span>
+            </ui-select-choices>
+        </ui-select>
+        <span ng-show="errors.share" class="text-danger">Invalid users</span>
+    </div>
+
     <button type="submit" class="btn btn-default">Submit</button>
     <a ui-sref="app.projects.list" class="btn btn-default">Cancel</a>
 </form>

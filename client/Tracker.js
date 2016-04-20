@@ -1,5 +1,5 @@
 angular
-  .module('Tracker', ['ui.router', 'ngResource'])
+  .module('Tracker', ['ui.router', 'ngResource', 'ui.select'])
   .config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise("/app/login");
@@ -22,12 +22,12 @@ angular
       })
       .state('app.login', {
         url: "/login",
-        templateUrl: "auth/login.html",
+        templateUrl: "user/login.html",
         controller: 'LoginCtrl'
       })
       .state('app.signup', {
         url: "/signup",
-        templateUrl: "auth/signup.html",
+        templateUrl: "user/signup.html",
         controller: 'SignUpCtrl'
       })
       .state('app.logout', {

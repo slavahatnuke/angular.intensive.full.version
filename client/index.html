@@ -9,17 +9,22 @@
 
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="libs/ui-select/dist/select.min.css"/>
 
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="libs/angular-resource/angular-resource.min.js"></script>
+    <script src="libs/ui-select/dist/select.min.js"></script>
+    <script src="libs/lodash/dist/lodash.min.js"></script>
 
     <script src="Tracker.js"></script>
     <script src="TrackerCtrl.js"></script>
 
-    <script src="auth/LoginCtrl.js"></script>
-    <script src="auth/SignUpCtrl.js"></script>
-    <script src="auth/LogoutCtrl.js"></script>
+    <script src="user/LoginCtrl.js"></script>
+    <script src="user/SignUpCtrl.js"></script>
+    <script src="user/LogoutCtrl.js"></script>
+    <script src="user/UserService.js"></script>
+    <script src="user/filters/userNames.js"></script>
 
     <script src="projects/ProjectsCtrl.js"></script>
     <script src="projects/ProjectsEditCtrl.js"></script>
@@ -30,7 +35,6 @@
     <script src="tasks/TaskService.js"></script>
     <script src="tasks/taskEditor.js"></script>
 
-    <script src="services/UserService.js"></script>
 
 </head>
 <body ui-view>

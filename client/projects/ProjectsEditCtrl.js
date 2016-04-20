@@ -1,12 +1,14 @@
 angular
   .module('Tracker')
-  .controller('ProjectsEditCtrl', function ($scope, $state, Project) {
+  .controller('ProjectsEditCtrl', function ($scope, $state, Project, User) {
 
     if ($state.params.projectId) {
       $scope.project = Project.get({projectId: $state.params.projectId});
     } else {
-      $scope.project = new Project;
+      $scope.project = new Project();
     }
+
+    $scope.users = User.query();
 
     $scope.save = function () {
 

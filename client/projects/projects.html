@@ -19,4 +19,12 @@
         </a>
         <a ui-sref="app.projects.edit({projectId: project._id})" class="btn btn-sm btn-default">edit</a>
     </div>
+    <div class="panel-footer">
+        Author: {{project.author.name}}
+        <span ng-if="project.share.length">
+            Shared:
+            <span>{{project.share | userNames}}</span>
+        </span>
+
+    </div>
 </div>

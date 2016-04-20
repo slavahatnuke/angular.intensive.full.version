@@ -7,21 +7,34 @@ module.exports = function (app) {
 
   var projectForm = form(
     field('name').trim().required(),
-    field('description').trim()
+    field('description').trim(),
+    field('share').array()
   );
 
   app.get('/api/projects', function (req, res, next) {
-    Project.find({}, function (err, projects) {
-      if (err) {
-        return next(err);
-      }
+    Project
+      .find({
+        $or: [
+          {author: req.user},
+          {share: req.user}
+        ]
+      })
+      .populate('author', '_id name')
+      .populate('share', '_id name')
+      .exec(function (err, projects) {
+        if (err) {
+          return next(err);
+        }
 
-      res.json(projects);
-    })
+        res.json(projects);
+      })
   });
 
   app.post('/api/projects', projectForm, form.validateForm, function (req, res, next) {
-    new Project(req.form).save(function (err, project) {
+    var project = new Project(req.form);
+    project.author = req.user;
+
+    project.save(function (err, project) {
       if (err) {
         return next(err);
       }
@@ -32,7 +45,15 @@ module.exports = function (app) {
   });
 
   app.param('projectId', function (req, res, next, id) {
-    Project.findById(id, function (err, project) {
+    var query = {
+      _id: id,
+      $or: [
+        {author: req.user},
+        {share: req.user}
+      ]
+    };
+
+    Project.findOne(query, function (err, project) {
       if (err) {
         return next(err);
       }
