@@ -53,7 +53,11 @@ module.exports = function (app) {
       ]
     };
 
-    Project.findOne(query, function (err, project) {
+    Project
+      .findOne(query)
+      .populate('author', '_id name')
+      .populate('share', '_id name')
+      .exec(function (err, project) {
       if (err) {
         return next(err);
       }
@@ -65,11 +69,15 @@ module.exports = function (app) {
       req.Project = project;
       next();
 
-    })
+    });
   });
 
   app.get('/api/projects/:projectId', function (req, res) {
     res.json(req.Project);
+  });
+
+  app.get('/api/projects/:projectId/users', function (req, res) {
+    res.json(req.Project.share);
   });
 
   app.put('/api/projects/:projectId', projectForm, form.validateForm, function (req, res, next) {

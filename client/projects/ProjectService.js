@@ -7,4 +7,7 @@ angular
     });
 
   })
+  .factory('ProjectUser', function ($resource) {
+    return $resource('/api/projects/:projectId/users');
+  })
 ;

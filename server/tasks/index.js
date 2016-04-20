@@ -7,23 +7,28 @@ module.exports = function (app) {
 
   var taskForm = form(
     field('name').trim().required(),
+    field('assigned').trim().required(),
     field('description').trim()
   );
 
   app.get('/api/projects/:projectId/tasks', function (req, res, next) {
-    Task.find({project: req.Project}, function (err, tasks) {
-      if (err) {
-        return next(err);
-      }
+    Task.find({project: req.Project})
+      .populate('author', '_id name')
+      .populate('assigned', '_id name')
+      .exec(function (err, tasks) {
+        if (err) {
+          return next(err);
+        }
 
-      res.json(tasks);
-    })
+        res.json(tasks);
+      });
   });
 
   app.post('/api/projects/:projectId/tasks', taskForm, form.validateForm, function (req, res, next) {
     var task = new Task(req.form);
 
     task.project = req.Project;
+    task.author = req.user;
 
     task.save(function (err) {
       if (err) {
@@ -36,7 +41,12 @@ module.exports = function (app) {
   });
 
   app.param('taskId', function (req, res, next, id) {
-    Task.findById(id, function (err, task) {
+    var query = {
+      _id: id,
+      project: req.Project
+    };
+
+    Task.findOne(query, function (err, task) {
       if (err) {
         return next(err);
       }

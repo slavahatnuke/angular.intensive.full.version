@@ -28,6 +28,12 @@
         <span ng-show="!taskForm.description.$valid || errors.description" class="text-danger">Invalid description</span>
     </div>
 
+    <div class="form-group">
+        <label for="inputAssigned">Assigned</label>
+        <select name="assigned" class="form-control" id="inputAssigned" ng-options="user._id as user.name for user in users" ng-model="task.assigned"></select>
+        <span ng-show="!taskForm.assigned.$valid || errors.assigned" class="text-danger">Invalid assigned</span>
+    </div>
+
     <button type="submit" class="btn btn-default">Submit</button>
     <button type="button" ng-click="close()" class="btn btn-default">Cancel</button>
 </form>

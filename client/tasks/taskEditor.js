@@ -5,25 +5,46 @@ angular
     return {
       restrict: 'AE',
       scope: {
-        'projectId': '=projectId',
         'onComplete': '=onComplete',
+        'projectId': '=?projectId',
         'task': '=?task'
       },
       templateUrl: '../tasks/taskEditor.html',
-      controller: function ($scope, Task) {
+      controller: function ($scope, Task, ProjectUser) {
+
+        function getProjectId() {
+          if ($scope.task) {
+            return $scope.task.project;
+          }
+
+          return $scope.projectId;
+        }
+
+        $scope.loadForm = function () {
+          $scope.form = true;
+          $scope.users = ProjectUser.query({projectId: getProjectId()});
+        };
 
         $scope.edit = function () {
-          $scope.form = true;
+          $scope.loadForm();
+
+          if ($scope.task.assigned && $scope.task.assigned._id) {
+            $scope.task.assigned = $scope.task.assigned._id;
+          }
         };
 
         $scope.add = function () {
-          $scope.form = true;
+          $scope.loadForm();
           $scope.task = new Task;
         };
 
         $scope.close = function () {
           $scope.form = false;
           $scope.task = null;
+
+          if ($scope.onComplete instanceof Function) {
+            $scope.onComplete();
+          }
         };
 
         $scope.save = function () {
@@ -31,11 +52,6 @@ angular
 
           promise.then(function () {
             $scope.close();
-
-            if ($scope.onComplete instanceof Function) {
-              $scope.onComplete();
-            }
-
           }, function (resp) {
             $scope.errors = resp.data;
           })
