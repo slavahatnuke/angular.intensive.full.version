@@ -4,6 +4,7 @@ module.exports = function (mongoose) {
   var TaskSchema = new Schema({
     name: String,
     description: String,
+    status: String,
     project: {type: Schema.Types.ObjectId, ref: 'Project'},
     assigned: {type: Schema.Types.ObjectId, ref: 'User'},
     author: {type: Schema.Types.ObjectId, ref: 'User'},

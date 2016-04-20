@@ -34,6 +34,12 @@
         <span ng-show="!taskForm.assigned.$valid || errors.assigned" class="text-danger">Invalid assigned</span>
     </div>
 
+    <div class="form-group">
+        <label for="inputStatus">Status</label>
+        <select name="status" class="form-control" id="inputStatus" ng-options="status.value as status.name for status in statuses" ng-model="task.status"></select>
+        <span ng-show="!taskForm.status.$valid || errors.status" class="text-danger">Invalid status</span>
+    </div>
+
     <button type="submit" class="btn btn-default">Submit</button>
     <button type="button" ng-click="close()" class="btn btn-default">Cancel</button>
 </form>

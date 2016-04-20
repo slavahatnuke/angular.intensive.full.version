@@ -7,6 +7,7 @@ module.exports = function (app) {
 
   var taskForm = form(
     field('name').trim().required(),
+    field('status').trim().required(),
     field('assigned').trim().required(),
     field('description').trim()
   );
@@ -27,6 +28,7 @@ module.exports = function (app) {
   app.post('/api/projects/:projectId/tasks', taskForm, form.validateForm, function (req, res, next) {
     var task = new Task(req.form);
 
+    task.status = task.status || 'new';
     task.project = req.Project;
     task.author = req.user;
 

@@ -10,7 +10,7 @@ angular
         'task': '=?task'
       },
       templateUrl: '../tasks/taskEditor.html',
-      controller: function ($scope, Task, ProjectUser) {
+      controller: function ($scope, Task, ProjectUser, TaskService) {
 
         function getProjectId() {
           if ($scope.task) {
@@ -19,6 +19,8 @@ angular
 
           return $scope.projectId;
         }
+
+        $scope.statuses = TaskService.getStatuses();
 
         $scope.loadForm = function () {
           $scope.form = true;
@@ -35,7 +37,8 @@ angular
 
         $scope.add = function () {
           $scope.loadForm();
-          $scope.task = new Task;
+          var defaultStatus = TaskService.getDefaultStatus().value;
+          $scope.task = new Task({status: defaultStatus});
         };
 
         $scope.close = function () {
