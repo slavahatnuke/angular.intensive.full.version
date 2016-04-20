@@ -3,7 +3,7 @@
 <a ui-sref="app.projects.new">Add</a>
 
 <div ng-repeat="project in projects">
-    {{project.name}}
+    <a ui-sref="app.project({projectId: project._id})">{{project.name}}</a>
     <br/>
     {{project.description}}
     <br/>

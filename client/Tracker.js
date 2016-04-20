@@ -53,6 +53,12 @@ angular
         templateUrl: "projects/projectsEdit.html",
         controller: 'ProjectsEditCtrl'
       })
+      .state('app.project', {
+        parent: 'app.projects',
+        url: "/:projectId",
+        templateUrl: "projects/project.html",
+        controller: 'ProjectCtrl'
+      })
     ;
   })
 ;
