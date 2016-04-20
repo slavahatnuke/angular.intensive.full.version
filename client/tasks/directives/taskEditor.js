@@ -7,14 +7,14 @@ angular
       scope: {
         'onComplete': '=onComplete',
         'projectId': '=?projectId',
-        'task': '=?task'
+        'taskOrigin': '=?task'
       },
-      templateUrl: '../tasks/taskEditor.html',
+      templateUrl: 'tasks/directives/taskEditor.html',
       controller: function ($scope, Task, ProjectUser, TaskService) {
 
         function getProjectId() {
-          if ($scope.task) {
-            return $scope.task.project;
+          if ($scope.taskOrigin) {
+            return $scope.taskOrigin.project;
           }
 
           return $scope.projectId;
@@ -28,6 +28,8 @@ angular
         };
 
         $scope.edit = function () {
+
+          $scope.task = angular.copy($scope.taskOrigin);
           $scope.loadForm();
 
           if ($scope.task.assigned && $scope.task.assigned._id) {
@@ -36,9 +38,9 @@ angular
         };
 
         $scope.add = function () {
-          $scope.loadForm();
           var defaultStatus = TaskService.getDefaultStatus().value;
           $scope.task = new Task({status: defaultStatus});
+          $scope.loadForm();
         };
 
         $scope.close = function () {

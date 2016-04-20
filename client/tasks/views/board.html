@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-4">
+        <task-item task="task" ng-repeat="task in tasks | tasksByStatus : 'new'" on-task-update="init"></task-item>
+    </div>
+    <div class="col-md-4">
+        <task-item task="task" ng-repeat="task in tasks | tasksByStatus : 'in-progress'" on-task-update="init"></task-item>
+    </div>
+    <div class="col-md-4">
+        <task-item task="task" ng-repeat="task in tasks | tasksByStatus : 'done'" on-task-update="init"></task-item>
+    </div>
+</div>

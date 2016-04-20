@@ -10,8 +10,9 @@ angular
 
     $scope.init();
 
-    $scope.remove = function (task) {
-      task.$remove().then($scope.init);
+    $scope.view = 'board';
+    $scope.useView = function (view) {
+      $scope.view = view;
     }
 
   });

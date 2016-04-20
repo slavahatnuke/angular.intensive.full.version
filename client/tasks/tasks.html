@@ -1,20 +1,8 @@
+<div class="btn-group pull-right" role="group">
+    <button type="button" class="btn btn-default" ng-class="{active: view == 'list'}" ng-click="useView('list')">List</button>
+    <button type="button" class="btn btn-default" ng-class="{active: view == 'board'}" ng-click="useView('board')">Board</button>
+</div>
+
 <h3>Tasks <task-editor project-id="projectId" on-complete="init"></task-editor></h3>
 
-<div class="panel panel-default" ng-repeat="task in tasks">
-    <div class="panel-heading">
-        {{task.name}}
-    </div>
-    <div class="panel-body">
-        <p>{{task.description}}</p>
-        <a ng-click="remove(task)" class="btn btn-sm btn-default">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-            remove
-        </a>
-        <task-editor on-complete="init" task="task"></task-editor>
-    </div>
-    <div class="panel-footer">
-        Author: {{task.author.name}}
-        Assigned: {{task.assigned.name}}
-        Status: {{task.status | taskStatus}}
-    </div>
-</div>
+<div ng-include="'tasks/views/'+view+'.html'"></div>
