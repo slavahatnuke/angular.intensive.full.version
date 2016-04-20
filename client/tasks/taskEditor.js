@@ -7,14 +7,14 @@ angular
       scope: {
         'projectId': '=projectId',
         'onComplete': '=onComplete',
-        'task': '=task'
+        'task': '=?task'
       },
       templateUrl: '../tasks/taskEditor.html',
       controller: function ($scope, Task) {
 
         $scope.edit = function () {
           $scope.form = true;
-        }
+        };
 
         $scope.add = function () {
           $scope.form = true;
@@ -23,6 +23,7 @@ angular
 
         $scope.close = function () {
           $scope.form = false;
+          $scope.task = null;
         };
 
         $scope.save = function () {
