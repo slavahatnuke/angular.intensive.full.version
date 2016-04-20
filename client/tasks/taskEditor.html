@@ -1,0 +1,27 @@
+<button class="btn btn-sm btn-default" ng-click="add()" ng-if="!task">Add task</button>
+<button class="btn btn-sm btn-default" ng-click="edit()" ng-if="task">Edit task</button>
+
+<form ng-submit="save()" name="taskForm" ng-if="form">
+    <div class="form-group">
+        <label for="inputName">Name</label>
+        <input type="text" class="form-control"
+               id="inputName"
+               placeholder="Name"
+               ng-model="task.name"
+               name="name">
+        <span ng-show="!taskForm.name.$valid || errors.name" class="text-danger">Invalid name</span>
+    </div>
+
+    <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <textarea class="form-control"
+                  id="inputDescription"
+                  placeholder="Description"
+                  ng-model="task.description"
+                  name="description"></textarea>
+        <span ng-show="!taskForm.description.$valid || errors.description" class="text-danger">Invalid description</span>
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="button" ng-click="close()" class="btn btn-default">Cancel</button>
+</form>

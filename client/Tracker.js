@@ -36,7 +36,7 @@ angular
       })
       .state('app.projects', {
         url: "/projects",
-        template: "<ui-view></ui-view>"
+        template: "<ui-view></ui-view><ui-view name='tasks'></ui-view>"
       })
       .state('app.projects.list', {
         url: "/list",
@@ -56,8 +56,17 @@ angular
       .state('app.project', {
         parent: 'app.projects',
         url: "/:projectId",
-        templateUrl: "projects/project.html",
-        controller: 'ProjectCtrl'
+        views: {
+          '': {
+            templateUrl: "projects/project.html",
+            controller: 'ProjectCtrl'
+          },
+          'tasks@app.projects' : {
+            templateUrl: "tasks/tasks.html",
+            controller: 'TasksCtrl'
+          }
+        }
+
       })
     ;
   })
