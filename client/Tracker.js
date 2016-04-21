@@ -1,6 +1,6 @@
 angular
   .module('Tracker', ['ui.router', 'ngResource', 'ui.select'])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise("/app/login");
 
@@ -61,7 +61,7 @@ angular
             templateUrl: "projects/project.html",
             controller: 'ProjectCtrl'
           },
-          'tasks@app.projects' : {
+          'tasks@app.projects': {
             templateUrl: "tasks/tasks.html",
             controller: 'TasksCtrl'
           }
@@ -69,5 +69,25 @@ angular
 
       })
     ;
+
+    $httpProvider.interceptors.push(function ($q, $injector) {
+      var publicUrls = ['/app/login', '/app/signup'];
+      var isPublic = function () {
+        return _.includes(publicUrls, $injector.get('$location').url())
+      };
+
+      return {
+        'responseError': function (response) {
+          return $q(function (resolve, reject) {
+
+            if (response.status === 401 && !isPublic()) {
+              $injector.get('$state').go('app.login');
+            }
+
+            return reject(response);
+          });
+        }
+      };
+    });
   })
 ;
