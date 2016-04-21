@@ -14,8 +14,6 @@ app:
 mongo:
   image: mongo:latest
   command: "/entrypoint.sh mongod --smallfiles"
-  ports:
-    - "27017:27017"
 
 mongocli:
   image: mongo:latest
