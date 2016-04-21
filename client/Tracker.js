@@ -92,5 +92,11 @@ angular
     })
     .config(function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
+    })
+    .value('apiBaseUrl', 'http://docker:5100')
+    .factory('resource', function ($resource, apiBaseUrl) {
+        return function (url) {
+            arguments[0] = apiBaseUrl + url;
+            return $resource.apply($resource, arguments);
+        };
     });
-;

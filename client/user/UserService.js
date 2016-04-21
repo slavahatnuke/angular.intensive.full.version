@@ -5,14 +5,6 @@ angular
             update: {method: 'PUT'}
         });
     })
-    .factory('resource', function ($resource) {
-        var baseUrl = 'http://docker:5100';
-
-        return function (url) {
-            arguments[0] = baseUrl + url;
-            return $resource.apply($resource, arguments);
-        };
-    })
     .factory('UserService', function (resource) {
 
         var Auth = resource('/api/auth/:action', {}, {
