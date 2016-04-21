@@ -2,7 +2,7 @@ angular
     .module('Tracker', ['ui.router', 'ngResource', 'ui.select'])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
-        $urlRouterProvider.otherwise("/app/projects/list");
+        $urlRouterProvider.otherwise("/app/login");
 
         $stateProvider
             .state('app', {
