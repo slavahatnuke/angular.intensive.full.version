@@ -1,51 +1,59 @@
 angular
-  .module('Tracker')
-  .factory('User', function ($resource) {
-    return $resource('/api/users/:userId', {userId: '@_id'}, {
-      update: {method: 'PUT'}
-    });
-  })
-  .factory('UserService', function ($resource) {
-
-    var Auth = $resource('/api/auth/:action', {}, {
-      login: {method: 'POST', params: {action: 'login'}},
-      logout: {method: 'POST', params: {action: 'logout'}},
-      signUp: {method: 'POST', params: {action: 'signup'}}
-    });
-
-    var User = $resource('/api/users/me');
-
-    var self = {
-      user: null,
-
-      login: function (user) {
-        return new Auth(user).$login().then(function (user) {
-          self.user = user;
-          return user;
+    .module('Tracker')
+    .factory('User', function (resource) {
+        return resource('/api/users/:userId', {userId: '@_id'}, {
+            update: {method: 'PUT'}
         });
-      },
+    })
+    .factory('resource', function ($resource) {
+        var baseUrl = 'http://docker:5100';
 
-      logout: function () {
-        return new Auth().$logout().then(function () {
-          self.user = null;
+        return function (url) {
+            arguments[0] = baseUrl + url;
+            return $resource.apply($resource, arguments);
+        };
+    })
+    .factory('UserService', function (resource) {
+
+        var Auth = resource('/api/auth/:action', {}, {
+            login: {method: 'POST', params: {action: 'login'}},
+            logout: {method: 'POST', params: {action: 'logout'}},
+            signUp: {method: 'POST', params: {action: 'signup'}}
         });
-      },
 
-      signUp: function (user) {
-        return new Auth(user).$signUp().then(function (user) {
-          self.user = user;
-          return user;
-        });
-      },
+        var User = resource('/api/users/me');
 
-      load: function () {
-        return User.get().$promise.then(function (user) {
-          self.user = user;
-          return user;
-        });
-      }
-    };
+        var self = {
+            user: null,
 
-    return self
-  })
+            login: function (user) {
+                return new Auth(user).$login().then(function (user) {
+                    self.user = user;
+                    return user;
+                });
+            },
+
+            logout: function () {
+                return new Auth().$logout().then(function () {
+                    self.user = null;
+                });
+            },
+
+            signUp: function (user) {
+                return new Auth(user).$signUp().then(function (user) {
+                    self.user = user;
+                    return user;
+                });
+            },
+
+            load: function () {
+                return User.get().$promise.then(function (user) {
+                    self.user = user;
+                    return user;
+                });
+            }
+        };
+
+        return self
+    })
 ;

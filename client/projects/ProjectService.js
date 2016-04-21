@@ -1,13 +1,13 @@
 angular
   .module('Tracker')
-  .factory('Project', function ($resource) {
+  .factory('Project', function (resource) {
 
-    return $resource('/api/projects/:projectId', {projectId: '@_id'}, {
+    return resource('/api/projects/:projectId', {projectId: '@_id'}, {
       update: {method: 'PUT'}
     });
 
   })
-  .factory('ProjectUser', function ($resource) {
-    return $resource('/api/projects/:projectId/users');
+  .factory('ProjectUser', function (resource) {
+    return resource('/api/projects/:projectId/users');
   })
 ;

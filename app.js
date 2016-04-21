@@ -12,6 +12,15 @@ new application({
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
+var cors = require('cors');
+
+app.use(cors({
+    credentials: true,
+    origin: function (url, next) {
+        return next(null, url);
+    }
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 

@@ -3,3 +3,4 @@
 node_modules
 client/libs
 Vagrantfile
+server/config/local.js
