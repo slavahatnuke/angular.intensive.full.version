@@ -93,7 +93,7 @@ angular
     .config(function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })
-    .value('apiBaseUrl', 'http://docker:5100')
+    .value('apiBaseUrl', 'http://angular.plus1generation.com')
     .factory('resource', function ($resource, apiBaseUrl) {
         return function (url) {
             arguments[0] = apiBaseUrl + url;
