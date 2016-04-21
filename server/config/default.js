@@ -1,5 +1,4 @@
 module.exports = {
-
-  mongo: 'mongodb://localhost/angularApp'
-
+  mongo: 'mongodb://localhost/angularApp',
+  ui: true
 };
