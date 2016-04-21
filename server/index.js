@@ -20,6 +20,19 @@ module.exports = function (app) {
     }
   });
 
+  var validateMongoId = function (param) {
+    app.param(param, function (req, res, next, id) {
+      if (require('mongoose').Types.ObjectId.isValid(id)) {
+        next();
+      } else {
+        res.sendStatus(404);
+      }
+    });
+  };
+
+  validateMongoId('projectId');
+  validateMongoId('taskId');
+
   var isAuthenticated = function (req, res, next) {
     if (!req.user) {
       return res.sendStatus(401);
