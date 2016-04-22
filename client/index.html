@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="Tracker">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,4 +42,29 @@
 </head>
 <body ui-view>
 </body>
+
+<script>
+
+    var $injector = angular.injector(['ng']);
+    var $q = $injector.get('$q');
+    var $timeout = $injector.get('$timeout');
+
+    function loadConfig() {
+        return $q(function (resolve, reject) {
+            $timeout(function () {
+                var config = {
+                    baseUrl: 'http://angular.plus1generation.com'
+                };
+                resolve(config);
+            }, 100);
+        });
+    }
+
+    loadConfig().then(function (config) {
+        angular.module('Tracker').constant('config', config);
+        angular.bootstrap(document, ['Tracker'])
+    });
+
+</script>
+
 </html>

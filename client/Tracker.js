@@ -93,10 +93,21 @@ angular
     .config(function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })
-    .value('apiBaseUrl', 'http://angular.plus1generation.com')
-    .factory('resource', function ($resource, apiBaseUrl) {
-        return function (url) {
-            arguments[0] = apiBaseUrl + url;
-            return $resource.apply($resource, arguments);
+    .config(function (resourceProvider, config) {
+        resourceProvider.useBaseUrl(config.baseUrl || '');
+    })
+    .provider('resource', function () {
+        var self = {
+            baseUrl: '',
+            useBaseUrl: function (baseUrl) {
+                this.baseUrl = baseUrl;
+            },
+            $get: function ($resource) {
+                return function (url) {
+                    arguments[0] = self.baseUrl + url;
+                    return $resource.apply($resource, arguments);
+                };
+            }
         };
+        return self;
     });
