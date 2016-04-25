@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js -L -i node_modules/ -i client/",
+    "setup": "npm i && bower i --allow-root",
     "start.docker": "nodemon -x \"docker-compose kill app && docker-compose up app\" -i node_modules/ -i client/"
   },
   "repository": {
